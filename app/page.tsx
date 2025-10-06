@@ -111,7 +111,7 @@ export default function Home() {
           </h2>
           <p className="text-lg leading-relaxed mb-8">
             <span className="font-semibold">ArPixelForge</span> is a modern
-            <span className="font-semibold"> AI powered Text-to-Image Generator</span>
+            <span className="font-semibold"> AI powered Text-to-Image Generator </span>
             built with <span className="font-semibold">Next.js, TailwindCSS, and RapidAPI</span>.
             The project transforms simple text prompts into unique, high-quality images using advanced AI models.
             Designed with a clean and responsive UI, it provides a smooth user experience for experimenting with
