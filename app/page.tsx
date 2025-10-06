@@ -44,15 +44,7 @@ export default function Home() {
     setLoading(false);
   };
 
-  const handleDownload = (url: any) => {
-    const link = document.createElement("a");
-    link.href = `/api/download?url=${encodeURIComponent(url)}`;
-    link.setAttribute("download", "ai_image.png");
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  };
-
+ 
   return (
 
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4" style={{ backgroundImage: "url('/bg.webp')" }}>
@@ -142,7 +134,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-
     </div>
   );
 }
