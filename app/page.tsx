@@ -6,7 +6,7 @@ export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [message, setMessage] = useState(null);
   const generateImage = async () => {
     if (!prompt.trim()) return;
     setLoading(true);
@@ -33,6 +33,7 @@ export default function Home() {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
+      setMessage(result.message);
       console.log("API Response:", result);
       const imgs = result?.result?.data?.results?.map((item: any) => item.thumb) || [];
       setImages(imgs);
@@ -44,7 +45,6 @@ export default function Home() {
     setLoading(false);
   };
 
- 
   return (
 
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4" style={{ backgroundImage: "url('/bg.webp')" }}>
@@ -68,6 +68,17 @@ export default function Home() {
 
       {loading && (
         <p className="mt-6 text-gray-600 animate-pulse">Generating image...</p>
+      )}
+      {message && (
+        <div className="mt-10 w-full max-w-5xl">
+          <h3 className="text-xl font-semibold mb-2">Response</h3>
+          <p
+            className={`text-sm ${message === "success" ? "text-green-500" : "text-red-500"
+              }`}
+          >
+            {message}
+          </p>
+        </div>
       )}
 
       {images.length > 0 && (
@@ -96,6 +107,7 @@ export default function Home() {
           </div>
         </div>
       )}
+
       <section className=" text-slate-100 py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl font-bold text-can-400 mb-6">
