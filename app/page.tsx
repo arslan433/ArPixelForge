@@ -48,7 +48,7 @@ export default function Home() {
   return (
 
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4" style={{ backgroundImage: "url('/bg.webp')" }}>
-      <h1 className="text-4xl font-bold mb-6">Ar Pixel Forge</h1>
+      <h1 className="text-4xl font-bold mb-6">Pixel Forge</h1>
 
       <div className="flex gap-2 w-full max-w-xl">
         <input
