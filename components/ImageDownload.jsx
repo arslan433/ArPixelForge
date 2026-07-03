@@ -1,31 +1,30 @@
-"use client";
+export default function ImageDownload({ img, i }) {
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(`/api/download?url=${encodeURIComponent(img)}`);
+      if (!response.ok) throw new Error("Download failed");
 
-const handleDownload = async (url, filename) => {
-  try {
-    const res = await fetch(`/api/download?url=${encodeURIComponent(url)}`);
-    if (!res.ok) throw new Error("Failed to fetch image");
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
 
-    const blob = await res.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = `pixel-forge-${i + 1}`;
+      document.body.appendChild(a);
+      a.click();
+      
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      console.error(err);
+      alert("Could not process download.");
+    }
+  };
 
-    const link = document.createElement("a");
-    link.href = blobUrl;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-
-    link.remove();
-    window.URL.revokeObjectURL(blobUrl);
-  } catch (err) {
-    console.error("Download error:", err);
-  }
-};
-
-export default function ImageCard({ img, i }) {
   return (
-    <button
-      onClick={() => handleDownload(img, `arpixelforge_${i + 1}.png`)}
-      className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition"
+    <button 
+      onClick={handleDownload}
+      className="px-3 py-1 bg-slate-700 text-white text-xs rounded hover:bg-slate-600 transition"
     >
       Download
     </button>
